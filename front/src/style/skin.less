@@ -1,0 +1,132 @@
+@import "../plugin/style/mixin.less";
+
+body { .bk(#eee); .mt(0); .mb(50); .mlr(20); .ff('微软雅黑'); .fs(12) }
+div{ .oh; }
+table { border-collapse:collapse; border-spacing:0; }
+ol, ul, li{ .m(0); .p(0); list-style:none }
+// input[type='file'] { display: none }
+
+/* Input Style */
+select{ .p(3); .pt(4); .bsol(#ccc); .vm; }
+input[type='text'], input[type='password'], textarea { .m(0); .p(4); .pt(5); .bsol(#d0d0d0); .vm; }
+button { .pt(5); .pb(4); .plr(8); .bk(#006dcc); .bsol(#005199); .c(#fff); .cp; .vm; }
+
+// top
+#top { .h(45); .lh(45); .bk(#373d41); .bbsol(#2a2f32); .fs(15);
+
+	// sub
+	#logo { .fl; .w(49); .tc; .fs(18); .bk(#2a2f32); .c(#fff); .brsol(#2a2f32); }
+	#menu { .fr; }
+		li { .fl; .brsol(#2a2f32); }
+			a { .fr; .db; .plr(18); .c(#f3f3f3); .fs(15); .td(none); }
+			a:hover, a.on { .bk(#2a2f32); }
+				i { .mr(8) }
+				span {  }
+}	
+
+// big
+#big { .w(50); .bk(#333744); }
+#big ul { .pt(10); .bk(#4a5064); 
+	li { .tc; .ptb(10); .bk(#42485b); .mb(5); }
+	a { .c(#fff); .bk(#333744); .db; cursor:pointer; }
+	a:hover, a.on{ .bk(#42485b); }
+	i { .fs(21) }
+}
+
+// small
+#small { .w(170); .pt(20); .bk(#d3d5dc); 
+	h3 { .bk(#adb1bc); margin:0; height:40px; line-height:40px; font-size:14px; color:#fff; padding:0 30px; cursor:pointer;}
+	h3:hover, h3.on { .bk(#6d7487); color:#fff; }
+	ul { display:none }
+	ul.on { display:block }
+	a { display:block; color:#444; padding:0 30px; height:30px; line-height:30px; border-top:1px solid #d3d5dc }
+	a:hover, a.on { background:#eee; }
+}
+
+#conent { .bk(#666); }
+
+/*------------------------------------------------------------------------------------------*/
+/* Crucial Layout Style */
+/*------------------------------------------------------------------------------------------*/
+
+/* Top Style */
+#title { .mt(20); .mb(10); .h(38); .lh(38); .bk(#f9f9f9); border-top:solid 1px #cdcdcd; border-bottom:solid 1px #cdcdcd; }
+	#title .title { .fl; }
+		#title i { .ml(14); .mt(2); .fs(17); .c(#999); }
+		#title b { .ml(10); .fs(12); .fw(normal); }
+	#title .filter { .fr; .pt(6); .pr(10); }
+		#title input[type='text'] { .w(80); .mr(8); }
+		#title select { .mr(8); }
+
+/* FormTable Style : 2-1 */
+.single{ width:100%; background:#fff; }
+	.single th, .single td{padding:5px 10px; font-size:12px; border-top:1px solid #f3f3f3; line-height:24px; font-weight:normal; color:#333}
+	.single th{width:120px; text-align:right; color:#666;}
+	.single iframe{width:480px; height:25px}
+	.single input[type='text'], .single input[type='password'], .single textarea{width:220px;}
+	.single em{padding-left:10px; color:#ccc;}
+
+/* ListTable Style : 2-2 */
+.list{width:100%; background:#fff; border-top:1px solid #ddd; border-left:1px solid #ddd;}
+	.list tr{background:#fcfcfc;}
+	.list tr:hover{background:#eee}
+	.list th{color:#666; height:33px; line-height:33px; padding:0 10px; background:#efefef; border-bottom:1px solid #ddd; border-right:1px solid #ddd; font-weight:normal;}
+	.list td{padding:8px 10px; line-height:20px; border-right:1px solid #ddd; border-bottom:1px solid #ddd; text-align:center;}
+		.list input[type='text']{width:130px;}
+		.list td .img{height:27px;}
+		.list td .small{width:50px;}
+	.list a{margin:0 5px;}
+	.list a i{margin-right:2px;}
+
+/* Chart Style : 2-3 */
+#chart{width:100%; height:800px; overflow:hidden;}
+
+/* Command Style : 3 */
+.command{padding:8px; border:solid 1px #ddd; border-top:0; background:#fff;}
+	.command button { margin-right: 7px; }
+	
+/* Paging Style : 4 */
+.paging{padding:10px; border:solid 1px #ddd; border-top:0; text-align:right;}
+	.paging span, #paging a{margin-right:5px; padding:3px 5px; border:1px solid #ddd; background:#fff;}
+	.paging select{padding:3px; border:1px solid #ccc;}
+
+/**
+ * 图片上传
+ */
+.upimg {
+	float: left;
+	height: 80px; 
+	width: 70px; 
+	background: #f5f5f5;
+	text-align: center;
+	border:solid 1px #d0d0d0;
+	margin: 3px 8px 3px 0;
+	img {
+		height: 60px; 
+		width: 100%;
+	}
+	a {
+		background:#eee;
+		display:block;
+		color:#666; 
+	}
+}
+.upload {
+	float: left;
+	height: 80px; 
+	width: 70px; 
+	background: #f5f5f5;
+	text-align: center;
+	border:solid 1px #d0d0d0;
+	cursor: pointer;
+	margin: 3px 8px 3px 0;
+	i {
+		line-height: 80px;
+		font-size: 25px;
+		color: #ccc;
+	}
+	&:hover {
+		border:solid 1px #bbb;
+		background: #eee;
+	}
+}

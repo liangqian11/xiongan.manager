@@ -1,0 +1,130 @@
+[class*="avg-"] {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+[class*="avg-"]:before,
+[class*="avg-"]:after {
+  content: " ";
+  display: table;
+}
+[class*="avg-"]:after {
+  clear: both;
+}
+[class*="avg-"] > li {
+  -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+  display: block;
+  height: auto;
+  float: left;
+}
+
+.avg-1 > li {
+  width: 100%;
+}
+.avg-1 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-1 > li:nth-of-type(1n + 1) {
+  clear: both;
+}
+.avg-2 > li {
+  width: 50%;
+}
+.avg-2 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-2 > li:nth-of-type(2n + 1) {
+  clear: both;
+}
+.avg-3 > li {
+  width: 33.33333333%;
+}
+.avg-3 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-3 > li:nth-of-type(3n + 1) {
+  clear: both;
+}
+.avg-4 > li {
+  width: 25%;
+}
+.avg-4 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-4 > li:nth-of-type(4n + 1) {
+  clear: both;
+}
+.avg-5 > li {
+  width: 20%;
+}
+.avg-5 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-5 > li:nth-of-type(5n + 1) {
+  clear: both;
+}
+.avg-6 > li {
+  width: 16.66666667%;
+}
+.avg-6 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-6 > li:nth-of-type(6n + 1) {
+  clear: both;
+}
+.avg-7 > li {
+  width: 14.28571429%;
+}
+.avg-7 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-7 > li:nth-of-type(7n + 1) {
+  clear: both;
+}
+.avg-8 > li {
+  width: 12.5%;
+}
+.avg-8 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-8 > li:nth-of-type(8n + 1) {
+  clear: both;
+}
+.avg-9 > li {
+  width: 11.11111111%;
+}
+.avg-9 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-9 > li:nth-of-type(9n + 1) {
+  clear: both;
+}
+.avg-10 > li {
+  width: 10%;
+}
+.avg-10 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-10 > li:nth-of-type(10n + 1) {
+  clear: both;
+}
+.avg-11 > li {
+  width: 9.09090909%;
+}
+.avg-11 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-11 > li:nth-of-type(11n + 1) {
+  clear: both;
+}
+.avg-12 > li {
+  width: 8.33333333%;
+}
+.avg-12 > li:nth-of-type(n) {
+  clear: none;
+}
+.avg-12 > li:nth-of-type(12n + 1) {
+  clear: both;
+}

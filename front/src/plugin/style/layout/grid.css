@@ -1,0 +1,80 @@
+.row {
+  -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+}
+.row:before,
+.row:after {
+  content: " ";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+
+[class*="sp-"] {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+[class*="sp-"] + [class*="sp-"]:last-child {
+  float: right;
+}
+[class*="sp-"] + [class*="sp-"].sp-end {
+  float: left;
+}
+
+.sp-1, .sp-2, .sp-3, .sp-4, .sp-5, .sp-6, .sp-7, .sp-8, .sp-9, .sp-10, .sp-11, .sp-12 {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+
+.sp-1 {
+  max-width: 8.333333%;
+}
+
+.sp-2 {
+  max-width: 16.666667%;
+}
+
+.sp-3 {
+  max-width: 25%;
+}
+
+.sp-4 {
+  max-width: 33.333333%;
+}
+
+.sp-5 {
+  max-width: 41.666667%;
+}
+
+.sp-6 {
+  max-width: 50%;
+}
+
+.sp-7 {
+  max-width: 58.333333%;
+}
+
+.sp-8 {
+  max-width: 66.666667%;
+}
+
+.sp-9 {
+  max-width: 75%;
+}
+
+.sp-10 {
+  max-width: 83.333333%;
+}
+
+.sp-11 {
+  max-width: 91.666667%;
+}
+
+.sp-12 {
+  max-width: 100%;
+}

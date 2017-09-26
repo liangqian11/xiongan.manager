@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Global
+ ============================================================================ */
+ /**
+ * Fix the flawed CSS box model - Yes, IE6's box model is better
+ * Browser support: IE8+
+ * via: http://paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/**
+ * 所有标签的margin, padding
+ */
+* { 
+	margin: 0; 
+	padding: 0
+}
+
+/* ==========================================================================
+   Html, Body
+ ============================================================================ */
+ /* Set <html> and <body> to inherit the height of the viewport */
+html,
+body {
+  min-height: 100%;
+}
+
+/**
+ * `font-size` is set in `html` element to support the `rem` unit for font-sizes
+ * NOTE: IE9 & IE10 do not recognize `rem` units when used with the
+   `font` shorthand property.
+ */
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/**
+ * body
+ */
+body {
+  position: relative;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", sans-serif;
+  font-weight: normal;
+  line-height: 1.6;
+  color: #333333;
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   Control
+ ============================================================================ */
+/**
+ * link
+ */
+a {
+	text-decoration:none; 
+	outline:none; 
+	-webkit-touch-callout:none; 
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+/**
+ * img
+ */
+img { 
+	display:block; 
+	width:100%;
+}
+
+/**
+ * list
+ */
+ul {
+	-webkit-margin-before: 0;
+	-webkit-padding-start: 0;
+}
+ul, li {
+	list-style: none; 
+	margin:0; 
+	padding:0;
+}
+
+/**
+ * p
+ */
+p {
+	margin: 0;
+}

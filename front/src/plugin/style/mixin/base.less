@@ -1,0 +1,159 @@
+/**
+ * 用于简化输入的混合
+ * position
+ * display
+ * overflow
+ * float
+ * margin
+ * padding
+ * border
+ * radius
+ * width
+ * height
+ * line-height
+ * background
+ * text
+ * vertical
+ * cursor
+ * font
+ * color
+ * ellipsis
+ */
+
+/* position */
+.pa () { position: absolute }
+.pr () { position: relative }
+.pf () { position: fixed }
+
+/* display */
+.dn () { display: none }
+.db () { display: block }
+
+/* overflow */
+.oh () { overflow: hidden }
+.os () { overflow: scroll }
+.oxs () { overflow-x: scroll }
+.oys () { overflow-y: scroll }
+
+/* float */
+.fl () { float: left }
+.fr () { float: right }
+
+/* margin */
+.m (@v) when (isnumber(@v)) { margin: unit(@v, px) }
+.m (@v) when (ispercentage(@v)) { margin: @v }
+.mt (@v) when (isnumber(@v)) { margin-top: unit(@v, px) }
+.mt (@v) when (ispercentage(@v)) { margin-top: @v }
+.mr (@v) when (isnumber(@v)) { margin-right: unit(@v, px) }
+.mr (@v) when (ispercentage(@v)) { margin-right: @v }
+.mb (@v) when (isnumber(@v)) { margin-bottom: unit(@v, px) }
+.mb (@v) when (ispercentage(@v)) { margin-bottom: @v }
+.ml (@v) when (isnumber(@v)) { margin-left: unit(@v, px) }
+.ml (@v) when (ispercentage(@v)) { margin-left: @v }
+.mtb (@v) when (isnumber(@v)) { margin-top: unit(@v, px);  margin-bottom: unit(@v, px) }
+.mtb (@v) when (ispercentage(@v)) { margin-top: @v;  margin-bottom: @v }
+.mlr (@v) when (isnumber(@v)) { margin-left: unit(@v, px);  margin-right: unit(@v, px) }
+.mlr (@v) when (ispercentage(@v)) { margin-left: @v;  margin-right: @v }
+
+/* padding */
+.p (@v) when (isnumber(@v)) { padding: unit(@v, px) }
+.p (@v) when (ispercentage(@v)) { padding: @v }
+.pt (@v) when (isnumber(@v)) { padding-top: unit(@v, px) }
+.pt (@v) when (ispercentage(@v)) { padding-top: @v }
+.pr (@v) when (isnumber(@v)) { padding-right: unit(@v, px) }
+.pr (@v) when (ispercentage(@v)) { padding-right: @v }
+.pb (@v) when (isnumber(@v)) { padding-bottom: unit(@v, px) }
+.pb (@v) when (ispercentage(@v)) { padding-bottom: @v }
+.pl (@v) when (isnumber(@v)) { padding-left: unit(@v, px) }
+.pl (@v) when (ispercentage(@v)) { padding-left: @v }
+.ptb (@v) when (isnumber(@v)) { padding-top: unit(@v, px);  padding-bottom: unit(@v, px) }
+.ptb (@v) when (ispercentage(@v)) { padding-top: @v;  padding-bottom: @v }
+.plr (@v) when (isnumber(@v)) { padding-left: unit(@v, px);  padding-right: unit(@v, px) }
+.plr (@v) when (ispercentage(@v)) { padding-left: @v;  padding-right: @v }
+
+/* border */
+/* border */
+.bn () { border: none }
+.btn () { border-top: none; }
+.bbn () { border-bottom: none }
+.bln () { border-left: none }
+.brn () { border-right: none }
+.btbn () { border-top: none; border-bottom: none; }
+.blrn () { border-left: none; border-right: none; }
+.bsol (@color; @width: 1) { border: solid unit(@width, px) @color }
+.bdot (@color; @width: 1) { border: dotted unit(@width, px) @color }
+.bdas (@color; @width: 1) { border: dashed unit(@width, px) @color }
+.btsol (@color; @width: 1) { border-top: solid unit(@width, px) @color }
+.bbsol (@color; @width: 1) { border-bottom: solid unit(@width, px) @color }
+.blsol (@color; @width: 1) { border-left: solid unit(@width, px) @color }
+.brsol (@color; @width: 1) { border-right: solid unit(@width, px) @color }
+.btbsol (@color; @width: 1) { border-top: solid unit(@width, px) @color; border-bottom: solid unit(@width, px) @color }
+.blrsol (@color; @width: 1) { border-left: solid unit(@width, px) @color; border-right: solid unit(@width, px) @color }
+.btdot (@color; @width: 1) { border-top: dotted unit(@width, px) @color }
+.bbdot (@color; @width: 1) { border-bottom: dotted unit(@width, px) @color }
+.bldot (@color; @width: 1) { border-left: dotted unit(@width, px) @color }
+.brdot (@color; @width: 1) { border-right: dotted unit(@width, px) @color }
+.btbdot (@color; @width: 1) { border-top: dotted unit(@width, px) @color; border-bottom: dotted unit(@width, px) @color }
+.blrdot (@color; @width: 1) { border-left: dotted unit(@width, px) @color; border-right: dotted unit(@width, px) @color }
+.btdas (@color; @width: 1) { border-top: dashed unit(@width, px) @color }
+.bbdas (@color; @width: 1) { border-bottom: dashed unit(@width, px) @color }
+.bldas (@color; @width: 1) { border-left: dashed unit(@width, px) @color }
+.brdas (@color; @width: 1) { border-right: dashed unit(@width, px) @color }
+.btbdas (@color; @width: 1) { border-top: dashed unit(@width, px) @color; border-bottom: dashed unit(@width, px) @color }
+.blrdas (@color; @width: 1) { border-left: dashed unit(@width, px) @color; border-right: dashed unit(@width, px) @color }
+
+/* radius */
+.r (@v) { border-radius: unit(@v, px) }
+
+/* width */
+.w (@v) when (isnumber(@v)) { width: unit(@v, px) }
+.w (@v) when (ispercentage(@v)) { width: @v }
+
+/* height */
+.h (@v) when (isnumber(@v)) { height: unit(@v, px) }
+.h (@v) when (ispercentage(@v)) { height: @v }
+
+/* line-height */
+.lh (@v) when (isnumber(@v)) { line-height: unit(@v, px) }
+.lh (@v) when (ispercentage(@v)) { line-height: @v }
+
+/* background */
+.bk (@v) when (iscolor(@v)) { background: @v }
+.bk (@v, @rest...) when (isurl(@v)) { background: url(@v) @rest }
+
+/* text */
+.t (@v) { text: @v }
+.tl () { text-align: left }
+.tr () { text-align: right }
+.tc () { text-align: center }
+.td (@v) { text-decoration: @v }
+
+/* font */
+.f (@v) { font: @v }
+.ff (@v) { font-family: @v }
+.fs (@v) when (isnumber(@v)) { font-size: unit(@v, px) }
+.fs (@v) when (isem(@v)) { font-size: @v }
+.fs (@v) when (isunit(@v, "rem")) { font-size: @v }
+.fw (@v) { font-weight: @v }
+
+/* vertical */
+.vm () { vertical-align:middle }
+
+/* cursor */
+.cp () { cursor:pointer }
+
+/* color */
+.c (@v) { color: @v }
+
+/* ellipsis */
+.e () {
+	white-space:nowrap;
+	text-overflow:ellipsis; 
+	-o-text-overflow:ellipsis;
+ 	overflow:hidden;
+}
+
+/* clear */
+.clear() { 
+	clear: both; 
+}
