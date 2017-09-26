@@ -1,25 +1,33 @@
-'use strict';
+const mysql = require('mysql');
 
-var mysql = require('mysql');
-
-var MYSQL_DATABASE = {
+/**
+ * mysql 数据库设置
+ */
+const MYSQL_DATABASE = {
+  // 用户库
   XIONGAN: {
     host: 'mysql.rdsm2glams7fhd5.rds.bj.baidubce.com',
     user: 'zdboy',
     password: 'Ac591234',
     database: 'he_xiongan'
   }
-};
 
-var MYSQL = {
+  /**
+   * mysql 连接池对象
+   */
+};const MYSQL = {
   XIONGAN: mysql.createPool(MYSQL_DATABASE.XIONGAN)
-};
 
-var REDIS = {
+  /**
+   * redis连接配置项
+   */
+};const REDIS = {
   MAIN: {
     HOST: 'redis.sjnvwllcdjkp.scs.bj.baidubce.com',
     PORT: 6379
   }
-};
 
-module.exports = { MYSQL: MYSQL, REDIS: REDIS };
+  /**
+   * 导出
+   */
+};module.exports = { MYSQL, REDIS };

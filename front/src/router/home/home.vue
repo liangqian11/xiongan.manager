@@ -18,28 +18,12 @@ table(cellpadding='0',cellspacing='0')
 		//- small
 		td#small(v-show='this.tab==2')
 			h3.on 企业服务
-			ul.on
-				li: a(href='/platform/xiongan/article/list.html',target='iframe') 服务列表
-				li: a(href='/platform/xiongan/article/add.html',target='iframe') 添加服务
-				li: a(href='/platform/xiongan/article/addcat.html',target='iframe') 服务类别列表
-				li: a(href='/platform/xiongan/article/swiper.html',target='iframe') 轮播图列表
-			h3 企业报道
-			ul
-				li: a(href='/platform/xiongan/company/list.html',target='iframe') 报道列表
-				li: a(href='/platform/xiongan/company/add.html',target='iframe') 添加报道
-			h3 企业招聘
-			ul
-				li: a(href='/platform/xiongan/wanted/list.html',target='iframe') 招聘企业列表
-				li: a(href='/platform/xiongan/wanted/add.html',target='iframe') 发布招聘企业
-			h3 雄安文化
-			ul
-				li: a(href='/platform/xiongan/culture/list.html',target='iframe') 文化列表
-				li: a(href='/platform/xiongan/culture/add.html',target='iframe') 发布文化
-			h3 政策报道
-			ul
-				li: a(href='/platform/xiongan/policy/list.html',target='iframe') 政策列表
-				li: a(href='/platform/xiongan/policy/add.html',target='iframe') 发布政策
-		td#content: iframe#iframe(frameborder='0',name='iframe',style='width:100%; height:800px;',src='/platform/xiongan/login.html')
+			// ul.on
+			// 	li: a(href='/platform/xiongan/article/list.html',target='iframe') 服务列表
+			// 	li: a(href='/platform/xiongan/article/add.html',target='iframe') 添加服务
+			// 	li: a(href='/platform/xiongan/article/addcat.html',target='iframe') 服务类别列表
+			// 	li: a(href='/platform/xiongan/article/swiper.html',target='iframe') 轮播图列表
+		td#content: iframe#iframe(frameborder='0',name='iframe',style='width:100%; height:800px;',src='/xiongan/login.html')
 </template>
 
 <script>

@@ -9,7 +9,7 @@ const MYSQL_DATABASE = {
     host: '192.168.0.96',
     user: 'root',
     password: '123456',
-    database: 'xiongan'
+    database: 'he_xiongan'
   }
 }
 

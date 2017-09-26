@@ -1,11 +1,9 @@
-'use strict';
+const _ = require('lodash');
+const ENV = require('./env');
+const WECHAT = require('./wechat/wechat');
+const WEPAY = require('./wechat/wepay');
 
-var _ = require('lodash');
-var ENV = require('./env');
-var WECHAT = require('./wechat/wechat');
-var WEPAY = require('./wechat/wepay');
-
-var STROAGE = null;
+let STROAGE = null;
 if (ENV.ENV.toLowerCase() === 'pro') {
   STROAGE = require('./stroage/pro');
 } else {
