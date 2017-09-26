@@ -21,7 +21,6 @@ export default {
 	methods: {
 		check(data){
 			this.$ajax.get('user/login/'+this.data.username+'/'+this.data.password,(res)=>{
-				alert(2222222222)
 				this.$msg.success('登录成功')
 				this.tab=1
 				this.msg=res.data[0]
