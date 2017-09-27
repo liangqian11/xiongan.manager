@@ -1,21 +1,27 @@
-// ---------------------------------------------------------------------------- GET
+//---------------------------------------------------------------------------- Package
 const _ = require('lodash')
+//---------------------------------------------------------------------------- Config
+const { MYSQL } = require('../../config')
+//---------------------------------------------------------------------------- Plugin
+const mysql = require('../../plugin/util/mysql')
+const sheet = require('../../plugin/util/sheet')
+//---------------------------------------------------------------------------- GET
 exports.get = {
   /**
    * 区域列表
    */
   '/area/list': async (ctx, next) => {
-    let area = await $.mysql.query($.conf.mysql.main, 'select * from area', [null]) 
-    ctx.result.ok.data = area
-    $.flush(ctx, ctx.result.ok)
+    let area = await mysql.query(MYSQL.XIONGAN, ['select * from area'], [null])
+    sheet[0].data = area[0]
+    ctx.body = sheet[0]
   },
   /**
    * 首页轮播列表
    */
   '/swiper/list': async (ctx, next) => {
-    let swiper = await $.mysql.query($.conf.mysql.main, 'select * from swiper', [null])
-    ctx.result.ok.data = swiper
-    $.flush(ctx, ctx.result.ok)
+    let swiper = await mysql.query(MYSQL.XIONGAN, ['select * from swiper'], [null])
+    sheet[0].data = swiper[0]
+    ctx.body = sheet[0]
   },
   /**
    * 登录
@@ -23,13 +29,14 @@ exports.get = {
   '/user/login/:username/:password': async (ctx, next) => {
     let username = ctx.params.username
     let password = ctx.params.password
-    let data = await $.mysql.query($.conf.mysql.main, 'select * from admin where username=? and password=? ', [username,password])
+    let data = await mysql.query(MYSQL.XIONGAN, ['select * from admin where username=? and password = ?'], [username,password])
     if(data.length > 0){
-       ctx.result.ok.data = data
-       $.flush(ctx, ctx.result.ok)
+      sheet[0].data = data
+      ctx.body = sheet[0]
     }else{
-     ctx.result.e4001.errmsg = '账号或密码错误'
-      $.flush(ctx, ctx.result.e4001)
+      sheet[1004].data = data
+      sheet[1004].massage = '账号或密码错误'
+      ctx.body = sheet[1004]
     }
   },
 }
@@ -39,20 +46,22 @@ exports.post = {
    * 添加区域
    */
   '/add/area': async (ctx, next) => {
-    let { name } =ctx.post
-    let data=await $.mysql.push($.conf.mysql.main, 'insert into area (name) values (?) ', [name])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
+    let { name } =ctx.request.body
+    let data=await mysql.query(MYSQL.XIONGAN, ['insert into area (name) values (?) '], [name])
+    sheet[0].message='添加成功'
+    ctx.body = sheet[0]
   },
    /**
    * 添加轮播
    */
-  '/add/swiper': async (ctx, next) => {
-    let { url,sort } =ctx.post
-    let data=await $.mysql.push($.conf.mysql.main, 'insert into swiper (url,sort) values (?,?) ', [url,sort])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
-  }
+  '/swiper/add': async (ctx, next) => {
+    let { url, sort } = ctx.request.body
+    let sql = ['insert into swiper ( sort, url ) values(?,?)']
+    let arg = [sort,url]
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message='添加成功'
+    ctx.body = sheet[0]
+  },
 }
 // ---------------------------------------------------------------------------- PUT
 exports.put = {
@@ -60,23 +69,37 @@ exports.put = {
    * 编辑区域
    */
   '/edit/area': async (ctx, next) => {
-    let { name,id } =ctx.put
-    let data=await $.mysql.push($.conf.mysql.main, 'update area set name=? where id =?', [name,id])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
+    if (!_.isArray(ctx.request.body)) {
+			ctx.request.body = [ctx.request.body]
+		}
+    let sql = []
+    let arg = []
+		for (let item of ctx.request.body) {
+      let { name, id } = item
+      sql.push('update area set name=? where id =?')
+      arg.push([ name, id ])
+		}
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message='更新成功'
+    ctx.body = sheet[0]
   },
   /**
    * 编辑轮播
    */
   '/edit/swiper': async (ctx, next) => {
-    if (!_.isArray(ctx.put)) {
-			ctx.put = [ctx.put]
+    if (!_.isArray(ctx.request.body)) {
+			ctx.request.body = [ctx.request.body]
 		}
-		for (let item of ctx.put) {
-      console.log(item.id)
-			await $.mysql.push($.conf.mysql.main, 'update swiper set sort=?,url=? where id =?', [item.sort,item.url,item.id])
+    let sql = []
+    let arg = []
+		for (let item of ctx.request.body) {
+      let { sort, id } = item
+      sql.push('update swiper set sort=? where id =?')
+      arg.push([ sort, id ])
 		}
-    $.flush(ctx, ctx.result.ok)
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message='更新成功'
+    ctx.body = sheet[0]
   },
   
 }
@@ -85,10 +108,13 @@ exports.delete = {
   /**
    * 删除轮播
    */
-  '/delete/swiper': async (ctx, next) => {
-    let id = ctx.delete
-    let data = await $.mysql.push($.conf.mysql.main, 'delete from swiper where id =? ', [ id ])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
-  }, 
+  '/swiper/remove/:ids': async (ctx, next) => {
+    let ids = ctx.params.ids
+    ids = ids.replace(/[|]/g, ',')
+    let sql = ['delete from swiper where id in (' + ids + ')']
+    let arg = null
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message='删除成功'
+    ctx.body = sheet[0]
+  }
 }
