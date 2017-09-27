@@ -17,12 +17,15 @@ table(cellpadding='0',cellspacing='0')
 
 		//- small
 		td#small(v-show='this.tab==2')
-			h3.on 企业服务
-			// ul.on
-			// 	li: a(href='/platform/xiongan/article/list.html',target='iframe') 服务列表
-			// 	li: a(href='/platform/xiongan/article/add.html',target='iframe') 添加服务
-			// 	li: a(href='/platform/xiongan/article/addcat.html',target='iframe') 服务类别列表
-			// 	li: a(href='/platform/xiongan/article/swiper.html',target='iframe') 轮播图列表
+			h3.on 系统管理
+			ul.on
+				li: a(href='/xiongan/home/area.html',target='iframe') 区域管理
+				li: a(href='/xiongan/home/swiper.html',target='iframe') 轮播图管理
+			h3 岗位管理
+			ul
+				li: a(href='/xiongan/examine/job.html?examine=1',target='iframe') 岗位列表
+				li: a(href='/xiongan/examine/job.html?examine=0',target='iframe') 待审核列表
+				li: a(href='/xiongan/examine/job.html?examine=2',target='iframe') 审核失败列表
 		td#content: iframe#iframe(frameborder='0',name='iframe',style='width:100%; height:800px;',src='/xiongan/login.html')
 </template>
 
