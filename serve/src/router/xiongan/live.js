@@ -1,3 +1,10 @@
+//---------------------------------------------------------------------------- Package
+const _ = require('lodash')
+//---------------------------------------------------------------------------- Config
+const { MYSQL } = require('../../config')
+//---------------------------------------------------------------------------- Plugin
+const mysql = require('../../plugin/util/mysql')
+const sheet = require('../../plugin/util/sheet')
 // ---------------------------------------------------------------------------- GET
 exports.get = {
  /**
@@ -6,34 +13,25 @@ exports.get = {
   '/live/list/manager': async (ctx, next) =>{
     let arg = []
     let where = ''
-    if(ctx.name){
-      where = where == '' ? ' where name = ?' : where + ' and name = ?'
-			arg.push(ctx.name)
+    let limit = ' limit 0,10'
+    if(ctx.query.name){
+      where = where == '' ? ' where name like "%'+ ctx.query.name +'%"' : where + ' and name like "%'+ ctx.query.name +'%"'
     }
-    let live = await $.mysql.query($.conf.mysql.main, 'select * from live' + where, [arg])
-    ctx.result.ok.data = live
-    $.flush(ctx, ctx.result.ok)
+    if(ctx.query.page > 0){
+      limit = ' limit ' + (ctx.query.page-1)*10 + ',10'
+    }
+    let data = await mysql.query(MYSQL.XIONGAN, ['select * from live' + where + ' order by time desc ' + limit], arg)
+    sheet[0].data = data[0]
+    ctx.body = sheet[0]
   },
   /**
    * 直播详情
    */
   '/live/detail/manager/:id': async (ctx, next) =>{
     let id = ctx.params.id
-    let detail = await $.mysql.query($.conf.mysql.main, 'select * from live where id = ?', [id])
-    ctx.result.ok.data = detail
-    $.flush(ctx, ctx.result.ok)
-  },
-  /**
-   * 首页只显示一个
-   */
-  '/live/one': async (ctx, next) =>{
-    let data = await $.mysql.query($conf.mysql.main, 'select * from live where ishome = 1', [null])
-    if(data.length != 1){
-      ctx.result.e4001.errmsg = '已经设置过了'
-      $.flush(ctx, ctx.result.e4001)
-    }
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
+    let data = await mysql.query(MYSQL.XIONGAN, ['select * from live where id = ?'], [id])
+    sheet[0].data = data[0]
+    ctx.body = sheet[0]
   }
 }
 // ---------------------------------------------------------------------------- POST
@@ -42,10 +40,17 @@ exports.post = {
    * 添加直播
    */
   '/live/add': async (ctx, next) => {
-    let {name, img, href, time, end_time, ishome, status} = ctx.post
-    let data = await $.mysql.push($.conf.mysql.main, 'insert into live (name,img,href,time,end_time,ishome,status) values(?,?,?,?,?,?,?)', [name,img,href,time,end_time,ishome,status])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
+    let {name, img, href, time, status} = ctx.request.body
+    time = Date.parse(new Date(time.replace(/\T/g,' '))).toString().slice(0,10)
+    let today = Date.parse(new Date()).toString().slice(0,10)
+    if(time > today){
+      status = 0
+    }else{
+      status = 1
+    }
+    let data = await mysql.query(MYSQL.XIONGAN, ['insert into live (name,img,href,time,status) values(?,?,?,?,?)'], [name,img,href,time,status])
+    sheet[0].message = '添加成功'
+    ctx.body = sheet[0]
   }
 }
 // ---------------------------------------------------------------------------- PUT
@@ -54,21 +59,58 @@ exports.put = {
    * 编辑直播
    */
   '/live/edit/manager': async (ctx, next) =>{
-    let {name, img, href, time, end_time, ishome, status, id} = ctx.put
-    let data = await $.mysql.push($.conf.mysql.main, 'update live name=?, img=?, href=?, time=?, end_time=?, ishome=?, status=? where id=?', [name,img,href,time,end_time,ishome,status,id])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
-  }
+    let {name, img, href, time, status, end_time, id} = ctx.request.body
+    time = Date.parse(new Date(time.replace(/\T/g,' '))).toString().slice(0,10)
+    let today = Date.parse(new Date()).toString().slice(0,10)
+    if(status==true){
+      status = 2
+      end_time = today
+    }else if(status==false && time > today){
+      status = 0
+    }else{
+      status = 1
+    }
+    let data = await mysql.query(MYSQL.XIONGAN, ['update live set name=?, img=?, href=?, time=?, status=?, end_time=? where id=?'], [name,img,href,time,status,end_time,id])
+    sheet[0].data = data[0]
+    ctx.body = sheet[0]
+  },
+   /**
+   * 行更新
+   */
+  '/live/uprow': async (ctx, next) => {
+    if (!_.isArray(ctx.request.body)) {
+      ctx.request.body = [ctx.request.body]
+    }
+    await mysql.query(MYSQL.XIONGAN, ['update live set ishome=0'], [null])
+    let sql = []
+    let arg = []
+    for (let item of ctx.request.body) {
+      let { ishome, id } = item
+      if(item.ishome==true){
+        item.ishome = 1
+      }else{
+        item.ishome = 0
+      }
+      sql.push('update live set ishome=? where id=?')
+      arg.push([ishome, id])
+    }
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message = '更新成功!'
+    ctx.body = sheet[0]
+  },
 }
 // ---------------------------------------------------------------------------- DELETE
 exports.delete = {
   /**
    * 删除直播
    */
-  '/live/delete/manager/:id': async (ctx, next) =>{
-    let id = ctx.params.id
-    let data = await $.mysql.push($.conf.mysql.main, 'delete from live where id = ?', [id])
-    ctx.result.ok.data = data
-    $.flush(ctx, ctx.result.ok)
+  '/live/delete/manager/:ids': async (ctx, next) =>{
+    let ids = ctx.params.ids
+    ids = ids.replace(/[|]/g, ',')
+    let sql = ['delete from live where id in (' + ids + ')']
+    let arg = null
+    await mysql.query(MYSQL.XIONGAN, sql, arg)
+    sheet[0].message = '删除成功!'
+    ctx.body = sheet[0]
   }
 }

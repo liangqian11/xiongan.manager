@@ -6,7 +6,7 @@ const mysql = require('mysql')
 const MYSQL_DATABASE = {
   // 雄安库
   XIONGAN: {
-    host: '192.168.0.96',
+    host: '192.168.1.45',
     user: 'root',
     password: '123456',
     database: 'xiongan'

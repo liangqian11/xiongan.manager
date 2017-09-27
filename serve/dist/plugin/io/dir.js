@@ -1,40 +1,56 @@
-//---------------------------------------------------------------------------- Package
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-//---------------------------------------------------------------------------- mkdirSync
-/**
- * 循环遍历创建目录，同步版本
- */
+'use strict';
+
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var fs = require('fs');
+var os = require('os');
+var path = require('path');
+
 exports.mkdirSync = function (dirpath, mode) {
   if (!fs.existsSync(dirpath)) {
+    var pathtmp = os.platform() == 'linux' ? '/' : null;
 
-    // 声明临时目录字符串
-    let pathtmp = os.platform() == 'linux' ? '/' : null;
+    var arr = dirpath.split(path.sep);
 
-    // 分割并遍历fullpath
-    let arr = dirpath.split(path.sep);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
-    // 遍历创建目录
-    for (let dirname of arr) {
-      if (dirname != '') {
+    try {
+      for (var _iterator = (0, _getIterator3.default)(arr), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var dirname = _step.value;
 
-        // 如果pathtmp已被赋值，则添加下一个子目录
-        // 否则直接等于dirname
-        if (pathtmp) {
-          pathtmp = path.join(pathtmp, dirname);
-        } else {
-          pathtmp = dirname;
+        if (dirname != '') {
+          if (pathtmp) {
+            pathtmp = path.join(pathtmp, dirname);
+          } else {
+            pathtmp = dirname;
+          }
+
+          if (!fs.existsSync(pathtmp)) {
+            fs.mkdirSync(pathtmp, mode);
+          }
         }
-
-        // 如果该子目录不存在，则同步创建
-        if (!fs.existsSync(pathtmp)) {
-          fs.mkdirSync(pathtmp, mode);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
         }
       }
     }
   }
 
-  // 返回true
   return true;
 };

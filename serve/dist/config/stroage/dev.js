@@ -1,33 +1,25 @@
-const mysql = require('mysql');
+'use strict';
 
-/**
- * mysql 数据库设置
- */
-const MYSQL_DATABASE = {
-  // 雄安库
+var mysql = require('mysql');
+
+var MYSQL_DATABASE = {
   XIONGAN: {
-    host: '192.168.0.96',
+    host: '192.168.1.45',
     user: 'root',
     password: '123456',
-    database: 'he_xiongan'
+    database: 'xiongan'
   }
+};
 
-  /**
-   * mysql 连接池对象
-   */
-};const MYSQL = {
+var MYSQL = {
   XIONGAN: mysql.createPool(MYSQL_DATABASE.XIONGAN)
+};
 
-  /**
-   * redis连接配置项
-   */
-};const REDIS = {
+var REDIS = {
   MAIN: {
     HOST: 'localhost',
     PORT: 6379
   }
+};
 
-  /**
-   * 导出
-   */
-};module.exports = { MYSQL, REDIS };
+module.exports = { MYSQL: MYSQL, REDIS: REDIS };

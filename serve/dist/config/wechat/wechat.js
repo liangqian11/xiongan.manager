@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   WECHAT: {
     APPID: 'wx6c6398aa27bba6c6',
